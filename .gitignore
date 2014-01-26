@@ -1,0 +1,31 @@
+# rcov
+coverage
+coverage.data
+
+# rdoc
+rdoc
+
+# yard
+doc
+.yardoc
+
+# bundler
+.bundle
+
+# jeweler
+pkg
+
+# MacOS:
+.DS_Store
+
+# TextMate
+*.tmproj
+tmtags
+
+# vim:
+*.swp
+
+# rubinius:
+*.rbc
+
+Gemfile.lock
