@@ -1,0 +1,68 @@
+<% @categories = Set.new %>
+<%= render 'node/common.erb' %>
+<!-- Example starts here -->
+<% if false %>
+<% if @data["run_list"].grep(/nginx/).any? %>
+
+<%= render 'node/nginx.erb' %>
+<% @categories.add "Web Servers" %>
+<% end %>
+<% if @data["run_list"].grep(/apache2/).any? %>
+
+<%= render 'node/apache2.erb' %>
+<% @categories.add "Web Servers" %>
+<% end %>
+<% if @data["run_list"].grep(/php5-fpm/).any? %>
+
+<%= render 'node/php5-fpm.erb' %>
+<% @categories.add "Web Servers" %>
+<% end %>
+<% if @data["run_list"].grep(/mysql.*server/).any? %>
+
+<%= render 'node/mysql-server.erb' %>
+<% @categories.add "DB Servers" %>
+<% end %>
+<% if @data["run_list"].grep(/exim4|exim-client/).any? %>
+
+<%= render 'node/exim.erb' %>
+<% end %>
+<% end %>
+<% if @data["run_list"].grep(/bacula-fd/).any?
+  @categories.add "Servers with backups"
+else
+  @categories.add "Servers w/o backups"
+end %>
+<% if @data["fqdn"] =~ (/^(.+?)(\d+)/)
+  @categories.add case $1
+    when "web"
+      "Web Servers"
+    when "db"
+      "DB Servers"
+    when "dev"
+      "Dev Servers"
+    when "hw"
+      "HW Servers"
+    when "ldap"
+      "LDAP Servers"
+    when "backup"
+      "Backup Servers"
+    when "ns"
+      "NS Servers"
+    when "mail"
+      "Mail Servers"
+    when "core"
+      "Core Servers"
+    when "docs"
+      "Doc Servers"
+    when "chef"
+      "Chef Servers"
+    when "monitor"
+      "Zabbix Servers"
+    else
+      nil
+  end
+end %>
+<!-- Example ends here -->
+<% (@categories.delete(nil)).each do |cat| %>
+<%= "[[Category: #{cat}]]\n" %>
+<% end %>

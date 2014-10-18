@@ -1,0 +1,11 @@
+require 'chef'
+require 'yaml'
+require 'json'
+require 'erb'
+require 'set'
+require 'media_wiki'
+
+require 'chef2wiki/base'
+require 'chef2wiki/chef'
+require 'chef2wiki/cookbook'
+require 'chef2wiki/mediawiki'

@@ -1,0 +1,13 @@
+<!-- This is just an example -->
+<% apache = @data["apache"] %>
+== Apache ==
+
+* User: <%= apache["user"] %>
+* Listen host: <%= !apache["listen_host"].empty? ? apache["listen_host"] : "all" %>
+* Listen ports: <%= apache["listen_ports"].join(", ") %>
+
+=== Prefork settings ===
+<%= print_attrs(apache["prefork"]) %>
+
+=== Worker settings ===
+<%= print_attrs(apache["worker"]) %>

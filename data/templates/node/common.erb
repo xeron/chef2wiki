@@ -1,0 +1,52 @@
+== Common Information ==
+
+=== System ===
+* OS: <%= @data["platform"].capitalize %> <%= @data["platform_version"] %>
+* CPU Real: <%= @data["cpu"]["real"] %>
+* CPU Total: <%= @data["cpu"]["total"] %>
+* Memory: <%= @data["memory"]["total"] %>
+* Swap: <%= @data["memory"]["swap"]["total"] %>
+* External IP: <%= @data["ipaddress"] %>
+
+=== Network ===
+<% net = @data["network"] %>
+* Default interface: <%= net["default_interface"] %>
+<% net["interfaces"].sort.each do |key, value| %>
+<% if value["flags"] && value["flags"].include?("UP") %>
+==== <%= key %> ====
+* Flags: <%= value["flags"].join(", ") %>
+* Addresses:
+<%= print_attrs(value["addresses"], "** ") %>
+<% end %>
+<% end %>
+
+=== Chef run list ===
+<% @data["run_list"].each do |item| %>
+* <%= item %>
+<% end %>
+<% if repos = @data["repos"] %>
+
+=== Repos ===
+<% repos.each do |key, value| %>
+'''<%= key %>'''
+<%= print_attrs(value) %>
+<% end %>
+<% end %>
+<% if fs = @data["filesystem"] %>
+
+=== Filesystems ===
+<% fs.sort.each do |key, value| %>
+<% if !["debugfs", "devpts", "sysfs", "udev", "/proc", "proc", "devtmpfs", "fusectl"].include? key %>
+==== <%= key %> ====
+* Mountpoint: <%= value["mount"] %>
+<%= "* Mount options: #{value["mount_options"].join(", ")}\n" if value["mount_options"] %>
+<%= "* FS type: #{value["fs_type"]}\n" if value["fs_type"] %>
+<%= "* Size: #{value["kb_size"]} KB\n" if value["kb_size"] %>
+<% end %>
+<% end %>
+<% end %>
+<% if sysctl = @data["sysctl"] %>
+
+=== Sysctl ===
+<%= print_attrs(sysctl["parameters"]) %>
+<% end %>

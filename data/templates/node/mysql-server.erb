@@ -1,0 +1,33 @@
+<!-- This is just an example -->
+<% mysql = @data["mysql"] %>
+== MySQL ==
+
+=== Users ===
+<%= print_attrs(mysql["users"]) %>
+
+=== Databases  ===
+<% if mysql["databases"] %>
+<% mysql["databases"].each do |item| %>
+* <%= item %>
+<% end %>
+<% end %>
+
+=== Backup settings ===
+<% if mysql["backup"] %>
+<%= print_attrs(mysql["backup"]) %>
+<% end %>
+
+=== Server settings ===
+<% if mysql["server"] %>
+<%= print_attrs(mysql["server"]) %>
+<% end %>
+
+=== Engine ===
+<% engine = mysql["template"] %>
+<% opts = mysql["#{engine}"] %>
+'''<%= engine %>'''
+<%= print_attrs(opts) %>
+<% if engine == "innodb" %>
+'''myisam'''
+<%= print_attrs(mysql["myisam"]) %>
+<% end %>

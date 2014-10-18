@@ -1,0 +1,13 @@
+<!-- This is just an example -->
+<% fpm = @data["fpm"] %>
+== FPM ==
+
+* User: <%= fpm["user"] %>
+* PHP modules: <%= fpm["modules"].join(", ") %>
+* debug_pool: <%= fpm["debug_pool"] == "enable" ? "enabled for ip: #{fpm["debug_ip"]}" : "disabled" %>
+
+=== Pools ===
+<% fpm["pools"].each do |pool, attrs| %>
+==== <%= pool %> ====
+<%= print_attrs(attrs) %>
+<% end %>

@@ -1,7 +1,7 @@
 source :rubygems
 
-gem "mediawiki-gateway"
 gem "chef"
+gem "mediawiki-gateway"
 
 group :development do
   gem "rdoc"

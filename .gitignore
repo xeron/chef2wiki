@@ -29,3 +29,4 @@ tmtags
 *.rbc
 
 Gemfile.lock
+*.gem

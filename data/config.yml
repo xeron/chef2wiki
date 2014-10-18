@@ -1,0 +1,15 @@
+wiki:
+  api_url: "http://some.wiki.org/api.php"
+  login: login
+  password: password
+  # domain: ldap_domain
+
+chef:
+  config: ~/.chef/knife.rb
+
+cookbooks:
+  # repo_paths:
+  #   - "~/chef/cookbooks/repo/path"
+
+nodes:
+  # exclude: ["node1.example.com", "node2.example.com"]

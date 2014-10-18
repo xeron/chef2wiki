@@ -1,0 +1,8 @@
+<!-- This is just an example -->
+<% exim = @data["exim"] %>
+== Exim ==
+
+* Mode: <%= exim["mode"] %>
+
+=== Settings ===
+<%= print_attrs(exim["configurations"][exim["mode"]]) %>

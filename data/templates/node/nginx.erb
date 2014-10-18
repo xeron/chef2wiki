@@ -1,0 +1,27 @@
+<!-- This is just an example -->
+<% nginx = @data["nginx"] %>
+== NGINX ==
+
+* Package: <%= nginx["package"] %>
+* Service: <%= nginx["service"] %>
+* User: <%= nginx["user"] %>
+* Mode: <%= nginx["mode"] %>
+
+=== Server settings ===
+<%= print_attrs(nginx["server"]["settings"]) %>
+
+=== Virtual hosts ===
+<% nginx["sites"].each do |site, data| %>
+==== <%= data["modes"].include?(nginx["mode"]) ? "#{site} (active)" : site %> ====
+'''Listen:''' <%= data["listen"] %>
+
+'''Names:'''<br />
+<% data["names"].each do |name| %>
+* <%= name %>
+<% end %>
+
+'''Modes:'''<br />
+<% data["modes"].each do |mode| %>
+* <%= mode %>
+<% end %>
+<% end %>
