@@ -87,34 +87,27 @@ class Chef2Wiki
     template.result(binding)
   end
 
-  # Recursively print object attributes with arg and value.
-  # If value class is a Hash - call this method again for value.
-  # If value class is an Array - print value with join.
+  # Recursively print Hash in wiki format
+  # If value class is a Hash - call this method again
+  # If value class is an Array - print it with join
   #
   # ==== Attributes
   # * +obj+ - Object for print (Hash)
-  # * +point+ - String for start of line (String)
-  # * +splitter+ - String for split attribute and value (String)
-  # * +endline+ - String for end of line (String)
-  def print_attrs(obj, point="* ", splitter=":", endline="\n")
+  # * +point+ - String for start of the line (String)
+  # * +splitter+ - String for attribute and value splitting (String)
+  # * +endline+ - String for end of the line (String)
+  def print_attrs(obj, point="*", splitter=":", endline="\n")
     result = ""
-    if obj
+    if obj.is_a?(Hash)
       obj.each do |arg, value|
-        result += "#{point}#{arg}"
-        if !value.to_s.empty?
-          result += "#{splitter} "
-          if value.is_a?(Hash)
-            # TODO: Hate this recursion. Also it's too wiki-related with this pointer usage.
-            result += "#{endline}#{print_attrs(value, point[0,1]+point, splitter, endline)}"
-          elsif value.is_a?(Array)
-            result += value.join(", ")
-            result += "#{endline}"
-          else
-            result += "#{value}"
-            result += "#{endline}"
-          end
+        result += "#{point} #{arg}#{splitter} "
+        result += case value
+        when Hash
+          "#{endline}#{print_attrs(value, point[0,1]+point, splitter, endline)}"
+        when Array
+          "#{value.join(", ")}#{endline}"
         else
-          result += "#{endline}"
+          "#{value}#{endline}"
         end
       end
     end
