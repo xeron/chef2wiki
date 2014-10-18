@@ -3,7 +3,7 @@ class Chef2Wiki
   # Get data for node.
   #
   # ==== Attributes
-  # * +node_name+ - Name of node from chef (String)
+  # * +node_name+ - Name of the node from chef (String)
   # ==== Returns
   # * Node data (Hash)
   def node_data(node_name)
