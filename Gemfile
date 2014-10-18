@@ -1,10 +1,6 @@
 source :rubygems
+gemspec :name => "chef2wiki"
 
-gem "chef"
-gem "mediawiki-gateway"
-
-group :development do
+group :docgen do
   gem "rdoc"
-  gem "bundler"
-  gem "jeweler", "~> 2.0.0"
 end
