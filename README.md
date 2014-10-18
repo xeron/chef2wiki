@@ -39,14 +39,14 @@ LDAP domain support requires http://www.mediawiki.org/wiki/Extension:LDAP_Authen
 
 ## Templates system
 
-Templates are located at `~/.chef2wiki/templates`. Required templates are:
+Templates are located at `~/.chef2wiki/templates/`. Required templates are:
 
 | Template | Wiki page | Variables |
 | -------- | --------- | --------- |
 | `node.erb` – main node template | As node name | `@data` – node attributes (Hash) |
 | `nodes.erb` – nodes list | `Servers_list` | `@node_list` – list of nodes (Array of Strings) |
 | `documentation.erb` – template for README.md | As cookbook name | `@content` – content of README.md |
-| `documentation_list.erb` | `Cookbooks_documentation` | `@cookbooks` – list of cookbooks (Array) |
+| `documentation_list.erb` – cookbooks list | `Cookbooks_documentation` | `@cookbooks` – list of cookbooks (Array) |
 
 You can use partials. For example default `node.erb` calls `node/common.erb`: `<%= render 'node/common.erb' %>`
 
