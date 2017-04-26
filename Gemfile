@@ -1,6 +1,6 @@
 source :rubygems
-gemspec :name => "chef2wiki"
+gemspec name: 'chef2wiki'
 
 group :docgen do
-  gem "rdoc"
+  gem 'rdoc'
 end

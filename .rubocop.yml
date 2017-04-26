@@ -1,0 +1,21 @@
+inherit_from: .rubocop_todo.yml
+
+AllCops:
+  Exclude:
+    - 'vendor/**/*'
+    - 'bundle/**/*'
+  TargetRubyVersion: 2.3
+
+Style/FrozenStringLiteralComment:
+  Enabled: false
+
+Style/EmptyMethod:
+  Enabled: false
+
+Style/PercentLiteralDelimiters:
+  PreferredDelimiters:
+    default: ()
+    '%i': ()
+    '%w': ()
+    '%I': ()
+    '%W': ()

@@ -1,20 +1,20 @@
 #!/usr/bin/env ruby
 
-require "chef2wiki"
+require 'chef2wiki'
 
 c2w = Chef2Wiki.new
 
 @node_list = c2w.node_list
 @node_list.each do |node|
-  unless c2w.excluded_node_list.include?(node)
-    c2w.add_page(node, c2w.render_node(node))
-  else
+  if c2w.excluded_node_list.include?(node)
     puts "[Chef2Wiki]\tNode #{node} exluded by configuration."
+  else
+    c2w.add_page(node, c2w.render_node(node))
   end
 end
 
 # Create other pages
-c2w.add_page("Servers_list", c2w.templates["nodes"].result)
+c2w.add_page('Servers_list', c2w.templates['nodes'].result)
 
 # Create documentation pages
 c2w.generate_docs
